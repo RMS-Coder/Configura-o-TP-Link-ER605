@@ -1,0 +1,120 @@
+L2 Freatures
+VLAN Config
+
+VLAN ID: 10
+VLAN Name: INFORMATICA
+
+Untagged Ports: 1/0/15
+
+********
+
+VLAN ID: 1
+VLAN Name: System-VLAN
+
+Untagged Ports:
+1/0/1-14,1/0/16-28
+
+--------------------------
+
+Port Config
+
+Computador
+1/0/15
+10
+Enabled
+Admit All
+
+*******
+
+Roteader da Internet
+1/0/1
+1
+Enabled
+Admit All
+
+---------------------------
+L3 Freatures
+
+Interface
+
+VLAN1
+Static
+192.168.4.100
+255.255.255.0
+Up
+
+*******
+
+VLAN10
+Static
+192.168.10.1
+255.255.255.0
+VLAN_INFORMATICA
+Up
+
+---------------------------
+L3 Freatures
+
+Static Routing
+IPv4 Static Routing Config
+1	
+0.0.0.0
+0.0.0.0
+192.168.4.254
+1
+0
+VLAN1
+
+---------------------------
+L3 Freatures
+DHCP Server
+
+DHCP Server: checked Enable
+
+Pool Config
+Network Address: 192.168.10.0
+Subnet Mask:255.255.255.0
+Lease Time:1440
+Default Gateway:192.168.10.1
+DNS Server:8.8.8.8 e 8.8.4.4
+
+*******
+
+Manual Binding
+1	
+INF_POOL
+192.168.10.119
+Hardware Address
+Ethernet
+MAC do computador
+
+
+
+
+
+L3 Freatures tenho as opções:
+
+Routing Table
+> IPv4 Routing Table
+> IPv6 Routing Table
+ARP
+> ARP Table
+> Static ARP
+> Gratuitous ARP
+> Proxy ARP
+Interface
+Static Routing
+> IPv4 Static Routing
+> IPv6 Static Routing
+DHCP Service
+> DHCP Server
+> DHCP Relay
+> DHCP L2 Relay
+
+
+
+
+
+
+
+
