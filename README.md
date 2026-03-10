@@ -530,3 +530,93 @@ Após aplicar as configurações:
 
 
 **Suporte:** Para mais informações, consulte a [documentação oficial TP-Link](https://www.tp-link.com/br/support/) ou entre em contato com o suporte técnico.
+
+<br><br>
+
+## Configuração de Controle de Banda (Bandwidth Control)
+
+### 1. Configuração Geral
+
+Antes de criar as regras individuais, ative o recurso de controle de banda:
+
+| Campo | Configuração |
+|-------|--------------|
+| **Enable Bandwidth Control** | ☑️ (Marcado / Habilitado) |
+| **Enable Bandwidth Control when bandwidth usage reaches** | 0% |
+
+> **Nota:** Configurar como "0%" faz com que o controle de banda seja aplicado **imediatamente**, sem esperar a rede atingir qualquer nível de congestionamento. Isso garante que os limites definidos sejam respeitados o tempo todo.
+
+---
+
+### 2. Lista de Regras de Controle de Banda
+
+#### 2.1. Criar Nova Regra
+
+Clique em **Add** (Adicionar) para criar uma nova regra.
+
+#### 2.2. Configuração da Regra para Desktops
+
+| Campo | Configuração | Descrição |
+|-------|--------------|-----------|
+| **Name** | `Limit_band_PC` | Nome identificador da regra |
+| **WAN** | WAN (ou WAN/LAN1) | Selecione a porta onde a internet está conectada |
+| **Source Type** | IP Group | Define que a regra se aplica a um grupo de IPs |
+| **IP Group** | DESKTOPs_101_a_119 | Selecione o grupo previamente criado |
+| **Maximum Upstream Bandwidth** | `10000` | **10 Mbps** de upload por máquina (em Kbps) |
+| **Maximum Downstream Bandwidth** | `50000` | **40 Mbps** de download por máquina (em Kbps) |
+| **Mode** | Individual | ⚠️ **Crítico:** Cada dispositivo tem seu próprio limite |
+| **Effective Time** | Any | Regra válida 24 horas por dia |
+| **Status** | ☑️ Enabled | Regra ativada |
+
+---
+
+### 3. Explicação do Modo "Individual" vs "Shared"
+
+| Modo | Comportamento | Quando Usar |
+|------|---------------|-------------|
+| **Individual** | Cada dispositivo no grupo tem seu próprio limite de banda (ex: 19 máquinas × 40 Mbps cada) | Quando deseja garantir um mínimo de banda por dispositivo |
+| **Shared** | Todos os dispositivos do grupo compartilham o limite total (ex: 40 Mbps divididos entre 19 máquinas) | Quando deseja limitar o consumo total do grupo |
+
+**No exemplo configurado:**
+- 19 computadores no grupo DESKTOPs_101_a_119
+- Cada um poderá usar até **40 Mbps de download** e **10 Mbps de upload** individualmente
+- O consumo total possível seria de até 760 Mbps (19 × 40 Mbps) — limitado pela velocidade contratada da internet
+
+---
+
+### 4. Conversão de Valores (Kbps para Mbps)
+
+| Limite em Mbps | Valor em Kbps |
+|----------------|---------------|
+| 5 Mbps | 5000 Kbps |
+| 10 Mbps | 10000 Kbps |
+| 20 Mbps | 20000 Kbps |
+| 30 Mbps | 30000 Kbps |
+| 40 Mbps | 40000 Kbps |
+| 50 Mbps | 50000 Kbps |
+| 100 Mbps | 100000 Kbps |
+
+> **Fórmula:** 1 Mbps = 1000 Kbps (o roteador trabalha com valores em Kbps)
+
+---
+
+### 5. Verificação e Aplicação
+
+Após preencher todos os campos:
+1. Clique em **Save** (Salvar) ou **Apply** (Aplicar)
+2. A regra aparecerá na lista de regras ativas
+3. Para editar, clique no ícone de lápis (editar)
+4. Para excluir, clique no ícone de lixeira
+
+<br><br>
+
+## 6. Configuração de Load Balancing (Equilíbrio de Carga)
+
+1. **Acesse** o menu **Transmission > Load Balancing > Basic Settings**
+2. Na seção **General**, marque a opção **Enable Load Balancing**
+3. Na seção **Basic Settings**:
+   - Marque **Enable Application Optimized Routing**
+   - Marque **Enable Bandwidth Based Balance Routing on port(s)**
+   - Selecione a(s) porta(s) WAN desejada(s) na lista (geralmente WAN)
+4. Clique em **Save** (Salvar) ou **Apply** (Aplicar)
+
