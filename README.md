@@ -426,3 +426,107 @@ Mantenha o firmware do roteador atualizado para garantir o correto funcionamento
 **Data da configuração:** 05/03/2026  
 **Equipamento:** TP-Link ER605  
 **Versão do firmware:** (verificar atualizações periodicamente)
+
+
+<br><br>
+
+
+
+# Configuração WAN - TP-Link ER605
+
+## 1. Ajustes de Servidores DNS
+
+Acesse: **Network > WAN > WAN
+
+**Configuração recomendada:**
+| Servidor | Opção 1 (Google) | Opção 2 (Cloudflare) |
+|----------|------------------|----------------------|
+| DNS Primário | 8.8.8.8 | 1.1.1.1 |
+| DNS Secundário | 8.8.4.4 | 1.0.0.1 |
+
+- Clique em **Save** (Salvar)
+
+---
+
+## 2. Configuração de Servidores NTP (Hora)
+
+Acesse: **System Tools > Time Settings** (Ferramentas do Sistema > Configurações de Hora)
+
+**Configuração com servidores brasileiros (NTP.br):**
+| Campo | Valor |
+|-------|-------|
+| Get Time from | NTP Server (ou "Get automatically from the Internet") |
+| Time Zone | (GMT-03:00) Brasilia |
+| NTP Server I | 200.160.7.186 (a.st1.ntp.br) |
+| NTP Server II | 200.189.40.8 (b.st1.ntp.br) |
+
+**Observação importante:** O ER605 em modo standalone aceita apenas **endereços IP**, não nomes de domínio. Utilize os números exatos fornecidos.
+
+---
+
+## 3. Ajuste da Detecção Online (Online Detection)
+
+Acesse: **Transmission > Load Balancing > Online Detection** (Transmissão > Equilíbrio de Carga > Detecção Online)
+
+### Opção 1: Always Online (Recomendado para estabilidade máxima)
+1. Clique no ícone de edição (lápis) da porta WAN
+2. No campo **Mode**, selecione **Always Online**
+3. Esta opção desativa completamente os testes de conexão
+4. Clique em **Save**
+
+### Opção 2: Manual (com IPs confiáveis)
+Se preferir manter a detecção ativa:
+| Campo | Valor Recomendado |
+|-------|-------------------|
+| Mode | Manual |
+| Ping | 8.8.8.8 |
+| DNS Lookup | 8.8.4.4 |
+| Interval | Manter padrão ou ajustar conforme necessidade |
+
+**Benefício:** Usar IPs do Google (8.8.8.8) evita falsos positivos causados por lentidão dos servidores da operadora.
+
+---
+
+## 4. Atualização de Firmware
+
+### 4.1. Verificação da Versão de Hardware
+**Atenção:** Verifique na etiqueta inferior do aparelho a versão de hardware (ex: **V1.0**, **V2.0**, **V2.6**). Instalar firmware incorreto pode danificar o equipamento.
+
+### 4.2. Download do Firmware
+1. Acesse o [Centro de Download da TP-Link](https://www.tp-link.com/br/support/download/)
+2. Pesquise por "ER605"
+3. Selecione a versão de hardware correspondente
+4. Baixe a versão mais recente do firmware (arquivo .zip)
+
+### 4.3. Procedimento de Atualização
+Acesse: **System Tools > Management > Firmware Upgrade**
+
+**Passos:**
+1. Extraia o arquivo .zip baixado
+2. Localize o arquivo com extensão **.bin**
+3. Clique em **Browse** (Procurar) e selecione o arquivo .bin
+4. Clique em **Upgrade**
+
+### 4.4. Precauções Importantes
+- **Use conexão cabeada:** Não realize atualização via Wi-Fi
+- **Faça backup:** System Tools > Backup & Restore
+- **Não desligue:** O processo leva de 3 a 5 minutos
+- **Aguarde reinicialização automática**
+
+---
+
+## 6. Configurações Adicionais
+
+### 6.1. Modo Bridge do Modem da Operadora
+Se o modem da operadora também for roteador:
+- Solicite à operadora a configuração em **modo Bridge**
+- Ou configure o ER605 com **IP Estático** na WAN
+
+### 6.2. Verificação Pós-Configuração
+Após aplicar as configurações:
+1. Monitore os logs em **System Tools > System Log**
+2. Verifique se o erro "Sntp WARNING Time renew failed" não reaparece
+3. Teste estabilidade da conexão por 24-48 horas
+
+
+**Suporte:** Para mais informações, consulte a [documentação oficial TP-Link](https://www.tp-link.com/br/support/) ou entre em contato com o suporte técnico.
