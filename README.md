@@ -535,6 +535,8 @@ Após aplicar as configurações:
 
 ## Configuração de Controle de Banda (Bandwidth Control)
 
+**Menu:** `Transmission > Bandwidth Control`
+
 ### 1. Configuração Geral
 
 Antes de criar as regras individuais, ative o recurso de controle de banda:
